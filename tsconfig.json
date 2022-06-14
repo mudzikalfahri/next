@@ -2,13 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"],
-      "@core/*": ["core/*"],
-      "@store/*": ["store/*"],
-      "@pages/*": ["pages/*"],
-      "@styles/*": ["styles/*"],
-      "@utils/*": ["utils/*"],
-      "@api/*": ["pages/api/*"]
+      "@/*": ["./*"]
     },
     "target": "es5",
     "downlevelIteration": true,

@@ -27,6 +27,11 @@ module.exports = {
       2,
       { namedComponents: "arrow-function" },
     ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      { js: "never", jsx: "never", ts: "never", tsx: "never" },
+    ],
     "react/jsx-uses-react": "off",
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
