@@ -11,9 +11,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       query: (initialPost) => ({
         url: "/posts",
         method: "POST",
-        body: {
-          ...initialPost,
-        },
+        body: initialPost,
       }),
       invalidatesTags: ["Post"],
     }),

@@ -1,4 +1,4 @@
-import { useGetPostsQuery } from "@/core/redux/slices/posts/postsSlice";
+import { useGetPostsQuery } from "@/core/redux/slices/posts/queries";
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {
