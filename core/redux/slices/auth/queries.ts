@@ -1,13 +1,25 @@
 import { apiSlice } from "@/core/redux/api/apiSlice";
-import { IPost } from "@/core/types/post";
+import { addUser } from "@/core/redux/slices/auth/action";
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getUsers: builder.query<IPost[], void>({
-      query: () => "/users",
-      providesTags: ["Post"],
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: credentials,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // `onSuccess` side-effect
+          dispatch(addUser({ token: data, user: { id: 1, name: "someone" } }));
+        } catch (err) {
+          // `onError` side-effect
+        }
+      },
     }),
   }),
 });
 
-export const { useGetUsersQuery } = extendedApiSlice;
+export const { useLoginMutation } = extendedApiSlice;

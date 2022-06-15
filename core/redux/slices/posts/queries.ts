@@ -4,7 +4,7 @@ import { IPost } from "@/core/types/post";
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPosts: builder.query<IPost[], void>({
-      query: () => "/posts",
+      query: () => "/products",
       providesTags: ["Post"],
     }),
     addNewPost: builder.mutation({

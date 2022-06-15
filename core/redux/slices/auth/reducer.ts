@@ -6,8 +6,6 @@ import { addUser, editUser, deleteUser } from "@/core/redux/slices/auth";
 const initialState = {
   user: null,
   token: null,
-  pending: false,
-  error: null,
   isAuthenticated: false,
 };
 
