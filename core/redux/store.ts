@@ -1,6 +1,16 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { apiSlice } from "@/core/redux/api/apiSlice";
 import { authReducer } from "@/core/redux/slices/auth";
+import { getFromStorage } from "@/utils/localstorage";
+
+const token = getFromStorage("token");
+const user = getFromStorage("user");
+
+const initialState = {
+  token: token || undefined,
+  user: user || undefined,
+  isAuthenticated: !!token,
+};
 
 export const store = configureStore({
   reducer: {
@@ -9,6 +19,12 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
+  preloadedState: { auth: initialState },
+});
+
+store.subscribe(() => {
+  localStorage.setItem("token", store.getState().auth.token);
+  localStorage.setItem("user", JSON.stringify(store.getState().auth.user));
 });
 
 export type AppDispatch = typeof store.dispatch;
