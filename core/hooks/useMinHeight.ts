@@ -1,24 +1,16 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-type ReturnTuple = [
-  number,
-  MutableRefObject<HTMLElement>,
-  MutableRefObject<HTMLElement>
-];
-
-const useMinHeight = (initial: number): ReturnTuple => {
-  const [minHeight, setMinHeight] = useState(initial);
-
-  const headerRef = useRef<HTMLElement>(null);
-  const footerRef = useRef<HTMLElement>(null);
-
+const useMinHeight = (ref): number => {
+  const [minHeight, setMinHeight] = useState(0);
   useEffect(() => {
-    const offset =
-      footerRef.current.offsetHeight + headerRef.current.offsetHeight;
+    const offset = ref.reduce((sum, cur) => {
+      const currentsum = sum + cur.current.offsetHeight;
+      return currentsum;
+    }, 0);
     setMinHeight(offset);
-  }, [headerRef, footerRef]);
+  }, [ref]);
 
-  return [minHeight, headerRef, footerRef];
+  return minHeight;
 };
 
 export default useMinHeight;
