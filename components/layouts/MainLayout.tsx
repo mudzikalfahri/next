@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 
 const MainLayout = ({ children }) => {
   const footerRef = useRef<HTMLElement>();
-  const minHeight = useMinHeight([footerRef]);
+  const offset = useMinHeight([footerRef]);
   return (
     <>
       <Head>
@@ -19,9 +19,7 @@ const MainLayout = ({ children }) => {
           </ul>
         </div>
       </header>
-      <div style={{ minHeight: `calc(100vh - ${minHeight}px)` }}>
-        {children}
-      </div>
+      <div style={{ minHeight: `calc(100vh - ${offset}px)` }}>{children}</div>
       <footer ref={footerRef} className="w-full bg-gray-100">
         <div className="max-w-5xl mx-auto py-4">Footer</div>
       </footer>
